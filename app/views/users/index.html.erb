@@ -1,0 +1,12 @@
+<h1>Look at these users</h1>
+<ul>
+<% @users.each do |u| %>
+	 <li><%= link_to u.name, "/users/#{u.id}" %></li>
+	<% end %>
+</ul>
+<h3>Add a user </h3>
+<%= form_tag("/users", method: "post") do %>
+	<%= label_tag("user[name]", "Name:") %>
+	<%=text_field_tag("user[name]") %>
+	<%= submit_tag("Submit") %>
+	<% end %>

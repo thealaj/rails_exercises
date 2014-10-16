@@ -1,0 +1,12 @@
+<h1>Look at these cohorts</h1>
+<ul>
+<% @cohorts.each do |c| %>
+	<li><%= link_to c.name, "/cohorts/#{c.id}" %></li>
+	<% end %>
+</ul>
+<h3>Add a cohort </h3>
+<%= form_tag("/cohorts", method: "post") do %>
+	<%= label_tag("cohort[name]", "Name:") %>
+	<%=text_field_tag("cohort[name]") %>
+	<%= submit_tag("Submit") %>
+	<% end %>

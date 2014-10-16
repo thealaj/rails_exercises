@@ -1,0 +1,24 @@
+<h1> Check out this cohort </h1>
+
+<h4><%= @cohort.name %></h4>
+<ul> 
+
+<% @members.each do |x|  %>
+<li><%= x.name  %>, <%= @cohort.memberships.find_by(user_id: x.id).role  %> | <%= link_to "Remove", "/cohorts/#{@cohort.id}/members/#{x.id}", method: :delete %> </li>
+<% end  %>
+</ul>
+
+<%= link_to "Add a new user", "/users" %>
+
+<%= form_tag("/cohorts/#{@cohort.id}/members", method: "create") do %>
+
+<%= label_tag("membership[user_id]", "User name:") %>
+<%= select_tag("membership[user_id]", options_from_collection_for_select(@users, :id, :name)) %>
+
+	<%= label_tag("membership[role]", "Teacher or student:") %>
+	<%= select_tag("membership[role]", options_for_select([["Teacher", "teacher"], ["Student", "student"]])) %>
+	
+
+	<%= submit_tag("Submit") %>
+	<% end %>
+
