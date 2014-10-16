@@ -1,0 +1,22 @@
+<h1> This user has these bikes</h1>
+<h3> <%= @user.name %></h3>
+<ul>
+<% @bikes.each do |b| %>
+<li><%= b.color %> bike | <%= link_to "Delete", "/bikes/#{b.id}", method: :delete %> </li>
+<% end %>
+</ul>
+
+<h3> Add a bike </h3>
+<% if @bike.errors %>
+<% @bike.errors.messages.each do |col, reasons| %>
+	<%=  reasons.inspect %>
+	<% end %>
+	<% end %>
+<%= form_tag("/bikes/create", method: "post") do %>
+<%= label_tag("bike[color]", "Color:") %>
+<%= text_field_tag("bike[color]") %>
+<%= hidden_field_tag("bike[user_id]", @user.id) %>
+
+
+<%= submit_tag("Submit") %>
+<% end %>

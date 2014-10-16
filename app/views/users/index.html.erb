@@ -1,0 +1,17 @@
+<h1>Check out these bike users</h1>
+
+<ul>
+<% @users.each do |u| %>
+<li><%= link_to u.name, "/users/#{u.id}" %></li>
+<% end %>
+</ul>
+
+<h2>New user</h2>
+<%= form_tag("/users/create", method: "post") do %>
+<%= label_tag("user[name]", "Name:") %>
+<%= text_field_tag("user[name]") %>
+
+
+<%= submit_tag("Submit") %>
+<% end %>
+
